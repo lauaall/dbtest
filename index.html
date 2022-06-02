@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>DB test</title>
+        <link rel="stylesheet" href="style.css">
+        <meta charset="utf-8">
+    </head>
+<body onLoad="visit()">
+    <p id="test"></p>
+    <p>Rääkimise ajal jääb see seisma ja näitab dB</p>
+    <button>Start</button>
+</body>    
+<script>
+var visited = localStorage.getItem("visitTimes");
+const p = document.getElementById("test");
+const btn = document.querySelector("button");
+
+    function visit() {
+    localStorage.setItem("visitTimes", ++visited);
+    }
+    btn.addEventListener("click", function() {
+    btn.style.fontSize = "0px";
+    btn.style.border = "0px";
+    btn.style.boxShadow = "none";
+    btn.style.background = "rgb(253, 167, 54)";
+    // create a new AudioContext
+    const audioContext = new AudioContext();
+
+    // get microphone input
+    navigator.mediaDevices.getUserMedia({ audio: true })
+    .then(function(stream) {
+    // create MediaStreamAudioSourceNode
+    const mediaStreamSource = audioContext.createMediaStreamSource(stream);
+
+    // create analyser
+    const analyser = audioContext.createAnalyser();
+
+    // connect analyser to MediaStreamAudioSourceNode
+    mediaStreamSource.connect(analyser);
+
+    // setInterval to get db level
+    setInterval(function() {
+        // get db level
+        const dbLevel = getAudioLevel(analyser);
+        if (dbLevel < 100) {
+        p.innerHTML = dbLevel + " dB";
+        }
+         }, 1);
+    });
+
+    // get db level
+    function getAudioLevel(analyser) {
+    // get frequency data
+    const frequencyData = new Uint8Array(analyser.frequencyBinCount);
+    analyser.getByteFrequencyData(frequencyData);
+
+            // get max value
+            let maxValue = 0;
+            for (let i = 0; i < frequencyData.length; i++) {
+                if (frequencyData[i] > maxValue) {
+                    maxValue = frequencyData[i];
+                }
+            }
+
+            // get db level
+            return maxValue;
+        }
+
+            });
+
+</script>
+
+</html>

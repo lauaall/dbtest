@@ -1,0 +1,70 @@
+/* garbage code by me */
+body {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif; 
+    font-size: xx-large; 
+    font-weight: bold;
+    gap: 250px;
+    background-color: rgb(255, 162, 48);
+    line-height: 1.0;
+
+}
+
+@media screen and (min-width: 0px) and (max-width: 767px)
+{
+    textarea
+    {
+        width: 399px; height: 181px;
+    }
+}
+
+textarea {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif; 
+    width: 1765px; height: 599px;
+    font-weight: bold;
+    outline: none; 
+    text-align: left;
+    
+}
+
+
+p {
+    text-align: center;
+    line-height: 20px;
+}
+
+ul {
+    text-align: center;
+    line-height: 0.8;
+    list-style-type: square;
+}
+
+
+.butt {
+    text-align: center;
+}
+
+button {
+    text-align: center;
+    font-weight: bold;
+    padding: 15px;
+    background-color: rgb(247, 140, 0);
+    cursor: pointer;
+    line-height: 1.0;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    font-size: xx-large;
+    border-radius: 16px;
+    border: 3px solid black;
+    outline: none;
+    box-shadow: 0 4px #999;
+}
+
+button:hover {
+    background-color: rgb(252, 159, 39);
+    transition: 0.8;
+}
+
+button:active {
+  background-color: rgb(253, 167, 54);
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
